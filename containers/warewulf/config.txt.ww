@@ -14,14 +14,13 @@ enable_uart=1
 
 ## Node Configuration
 {{ range $node := .AllNodes -}}
+{{ file (print .Tags.Serial "/config.txt") }}
 {{ $firmware := printf "/%s/%s" .ImageName ( default "efi" .Tags.Firmware ) }}
-{{ $cmdline := print "cmdline-" .Tags.Serial ".txt" }}
 ## {{ .Id }}
-[{{ .Tags.Serial }}]
 start_file={{ $firmware }}/start4db.elf
 fixup_file={{ $firmware }}/fixup4db.dat
 os_prefix={{ $firmware }}/
 kernel={{ $firmware }}/kernel8.img
 initramfs {{ $firmware }}/initramfs8
-cmdline={{ $cmdline }}
+cmdline={{ .Tags.Serial }}/cmdline.txt
 {{ end -}}
