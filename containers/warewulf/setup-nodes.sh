@@ -12,7 +12,6 @@ wwctl profile delete --yes nodes || true
 wwctl profile add nodes --profile default --image nodeimage
 wwctl profile set --yes nodes \
   --tagadd "Firmware=efi" \
-  --kernelargs '"console=serial0,115200"' \
   --netdev=end0 \
   --netmask=255.255.0.0 --gateway=10.5.0.1 --nettagadd="DNS=10.5.0.1"
 
